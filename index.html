@@ -17,7 +17,7 @@
             background-color: var(--bg-dark);
             color: #e0e0e0;
             line-height: 1.6;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 1rem;
             position: relative;
@@ -51,17 +51,28 @@
             text-shadow: 0 0 10px rgba(240, 240, 255, 0.3);
         }
 
-        .subtitle {
-            text-align: center;
-            color: #aaa;
+        .info-block {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
             margin-bottom: 1.5rem;
+            border-left: 3px solid var(--accent-purple);
+        }
+
+        .info-text {
+            margin: 0.5rem 0;
+        }
+
+        .highlight {
+            color: var(--neon-white);
+            font-weight: 500;
         }
 
         /* Карточки категорий */
         .section {
             background: var(--card-bg);
             border-radius: 8px;
-            padding: 1.2rem;
+            padding: 1rem;
             margin-bottom: 1.5rem;
             backdrop-filter: blur(5px);
             border: 1px solid #333;
@@ -69,59 +80,72 @@
 
         h2 {
             color: var(--accent-purple);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-top: 0;
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         /* Список команд */
         .commands-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 0.8rem;
+            columns: 2;
+            column-gap: 2rem;
             padding: 0;
             list-style: none;
         }
 
         .command {
             font-family: 'Courier New', monospace;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--neon-white);
-            padding: 0.6rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            margin-bottom: 0.7rem;
+            break-inside: avoid;
             position: relative;
             padding-left: 1.2rem;
+            transition: all 0.3s ease;
         }
 
         .command:hover {
             text-shadow: 0 0 8px var(--neon-white);
-            background: rgba(108, 92, 231, 0.1);
         }
 
         .command:before {
             content: "!";
             position: absolute;
-            left: 0.2rem;
+            left: 0;
             color: var(--accent-purple);
             font-weight: bold;
         }
 
+        .new-badge {
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+
         @media (max-width: 600px) {
             .commands-list {
-                grid-template-columns: 1fr;
+                columns: 1;
             }
         }
     </style>
 </head>
 <body>
     <h1>ЧАТ-БОТ ЗВУКОВ</h1>
-    <p class="subtitle">Активируйте звуки в чате за шармы • 500 шармов за воспроизведение</p>
+    
+    <div class="info-block">
+        <p class="info-text"><span class="highlight">Стоимость озвучки:</span> 500 шармов</p>
+        <p class="info-text"><span class="highlight">Проверить баланс:</span> напишите <span class="highlight">!шармы</span> в чат</p>
+        <p class="info-text">Шармы выдаются за активность и на усмотрение стримера</p>
+    </div>
 
     <div class="section">
-        <h2>🎤 Приветствия</h2>
+        <h2>🎤 Приветствия <span class="new-badge">NEW</span></h2>
         <ul class="commands-list">
             <li class="command">здарова бандиты</li>
             <li class="command">здарова чуваки</li>
@@ -144,6 +168,41 @@
             <li class="command">совпадение</li>
             <li class="command">ду хаст</li>
             <li class="command">x-files</li>
+            <li class="command">великолепный план Уолтер</li>
+            <li class="command">просчитался но где</li>
+            <li class="command">широкую на широкую</li>
+            <li class="command">гениально</li>
+            <li class="command">не участвую</li>
+            <li class="command">фиаско</li>
+            <li class="command">коварный тип</li>
+            <li class="command">это безопасно (андроид Дэвид)</li>
+            <li class="command">хьюстон у нас проблема</li>
+            <li class="command">сомнительно но окей (с) Тинькофф</li>
+            <li class="command">это было п#здец как смело (с) Тинькофф</li>
+            <li class="command">желаю здоровья и выжить (с) Тинькофф</li>
+            <li class="command">любая миссия (Футурама)</li>
+            <li class="command">бендер</li>
+            <li class="command">I need to meditate (Trevor GTA)</li>
+            <li class="command">I'll be back</li>
+            <li class="command">you died (Dark Souls)</li>
+            <li class="command">мои нервы</li>
+            <li class="command">титры (directed by Robert B. Weide)</li>
+            <li class="command">Ералаш</li>
+            <li class="command">Ямэтэ кудасай</li>
+            <li class="command">хлопики (by Maxim Paimushkin)</li>
+            <li class="command">мы в дерьме (Комиссар Жибер)</li>
+            <li class="command">крик Вильгельма</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🔫 Боевые</h2>
+        <ul class="commands-list">
+            <li class="command">зенитка</li>
+            <li class="command">ножик</li>
+            <li class="command">бонжур (Bad Commedian)</li>
+            <li class="command">дробовики (by Станислав Агафонов)</li>
+            <li class="command">дрын</li>
         </ul>
     </div>
 
@@ -157,11 +216,44 @@
     </div>
 
     <div class="section">
+        <h2>💬 Реакции</h2>
+        <ul class="commands-list">
+            <li class="command">чтооо (вопросительно)</li>
+            <li class="command">да да (иронично)</li>
+            <li class="command">нет</li>
+            <li class="command">hitler nein</li>
+            <li class="command">omg</li>
+            <li class="command">повезло</li>
+            <li class="command">не пройдешь</li>
+            <li class="command">ты пройдешь</li>
+            <li class="command">на нас напали</li>
+            <li class="command">опять разборка</li>
+            <li class="command">галочка</li>
+            <li class="command">пожили и хватит</li>
+            <li class="command">меня убили но я выжил</li>
+            <li class="command">я маслину поймал</li>
+            <li class="command">это жестко</li>
+            <li class="command">святая корова</li>
+            <li class="command">да ладно</li>
+            <li class="command">вонючий случай</li>
+            <li class="command">туды яго</li>
+            <li class="command">опа кого-то хлопнули</li>
+            <li class="command">писюны</li>
+            <li class="command">киборг убийца</li>
+            <li class="command">в очередь</li>
+            <li class="command">полномочия</li>
+            <li class="command">ура заработало</li>
+            <li class="command">убойные каникулы</li>
+        </ul>
+    </div>
+
+    <div class="section">
         <h2>🌙 На конец стрима</h2>
         <ul class="commands-list">
             <li class="command">всего хо ро ше го</li>
             <li class="command">все вон</li>
             <li class="command">счастливо братва</li>
+            <li class="command">скоро встретимся</li>
             <li class="command">hasta la vista</li>
         </ul>
     </div>
