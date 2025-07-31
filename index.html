@@ -16,15 +16,14 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-dark);
             color: #e0e0e0;
-            line-height: 1.6;
+            line-height: 1.4;
             max-width: 900px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 0.5rem;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Крупные звёзды на фоне */
         body::before {
             content: "";
             position: fixed;
@@ -45,70 +44,51 @@
 
         h1 {
             color: var(--neon-white);
-            font-size: 2.2rem;
+            font-size: 2rem;
             text-align: center;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(240, 240, 255, 0.3);
+            margin: 0.3rem 0;
+            text-shadow: 0 0 8px rgba(240, 240, 255, 0.3);
         }
 
         .info-block {
             background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid var(--accent-purple);
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin: 0.5rem 0 1rem;
+            border-left: 2px solid var(--accent-purple);
+            font-size: 0.9rem;
         }
 
-        .info-text {
-            margin: 0.5rem 0;
-        }
-
-        .highlight {
-            color: var(--neon-white);
-            font-weight: 500;
-        }
-
-        /* Карточки категорий */
         .section {
             background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(5px);
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
             border: 1px solid #333;
         }
 
         h2 {
             color: var(--accent-purple);
-            font-size: 1.4rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 1.2rem;
+            margin: 0.2rem 0 0.5rem;
         }
 
-        /* Список команд */
         .commands-list {
-            columns: 2;
-            column-gap: 2rem;
+            columns: 3;
+            column-gap: 1.5rem;
             padding: 0;
+            margin: 0;
             list-style: none;
+            font-size: 0.95rem;
         }
 
         .command {
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
             color: var(--neon-white);
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.3rem;
             break-inside: avoid;
+            padding-left: 1rem;
             position: relative;
-            padding-left: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .command:hover {
-            text-shadow: 0 0 8px var(--neon-white);
         }
 
         .command:before {
@@ -116,19 +96,19 @@
             position: absolute;
             left: 0;
             color: var(--accent-purple);
-            font-weight: bold;
         }
 
-        .new-badge {
-            background: var(--accent-purple);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            margin-left: 0.5rem;
+        .command:hover {
+            text-shadow: 0 0 6px var(--neon-white);
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .commands-list {
+                columns: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
             .commands-list {
                 columns: 1;
             }
@@ -139,13 +119,12 @@
     <h1>ЧАТ-БОТ ЗВУКОВ</h1>
     
     <div class="info-block">
-        <p class="info-text"><span class="highlight">Стоимость озвучки:</span> 500 шармов</p>
-        <p class="info-text"><span class="highlight">Проверить баланс:</span> напишите <span class="highlight">!шармы</span> в чат</p>
-        <p class="info-text">Шармы выдаются за активность и на усмотрение стримера</p>
+        <div>Стоимость озвучки: <b>500 шармов</b></div>
+        <div>Проверить баланс: <b>!шармы</b></div>
     </div>
 
     <div class="section">
-        <h2>🎤 Приветствия <span class="new-badge">NEW</span></h2>
+        <h2>🎤 Приветствия</h2>
         <ul class="commands-list">
             <li class="command">здарова бандиты</li>
             <li class="command">здарова чуваки</li>
@@ -192,32 +171,14 @@
             <li class="command">хлопики (by Maxim Paimushkin)</li>
             <li class="command">мы в дерьме (Комиссар Жибер)</li>
             <li class="command">крик Вильгельма</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>🔫 Боевые</h2>
-        <ul class="commands-list">
             <li class="command">зенитка</li>
             <li class="command">ножик</li>
             <li class="command">бонжур (Bad Commedian)</li>
             <li class="command">дробовики (by Станислав Агафонов)</li>
             <li class="command">дрын</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>🍕 Перерыв</h2>
-        <ul class="commands-list">
             <li class="command">пора подкрепиться</li>
             <li class="command">пикничок</li>
             <li class="command">кофе</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>💬 Реакции</h2>
-        <ul class="commands-list">
             <li class="command">чтооо (вопросительно)</li>
             <li class="command">да да (иронично)</li>
             <li class="command">нет</li>
@@ -244,12 +205,6 @@
             <li class="command">полномочия</li>
             <li class="command">ура заработало</li>
             <li class="command">убойные каникулы</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>🌙 На конец стрима</h2>
-        <ul class="commands-list">
             <li class="command">всего хо ро ше го</li>
             <li class="command">все вон</li>
             <li class="command">счастливо братва</li>
