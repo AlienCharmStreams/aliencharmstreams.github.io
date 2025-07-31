@@ -5,210 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чат-бот звуков | AlienCharm</title>
     <style>
-        /* Основные стили */
+        :root {
+            --neon-purple: #b721ff;
+            --neon-blue: #21d4fd;
+            --neon-pink: #ff2ced;
+            --bg-dark: #0f0a1a;
+            --text-light: #ffffff;
+        }
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            max-width: 800px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
-            overflow-x: hidden;
-            position: relative;
         }
-
-        /* Анимированные звёзды (как на странице конфига) */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="3000" opacity="0.7"><g fill="white"><circle cx="50" cy="80" r="0.6"/><circle cx="220" cy="150" r="0.4"/><circle cx="400" cy="300" r="0.8"/><circle cx="600" cy="50" r="0.5"/><circle cx="800" cy="400" r="0.7"/><circle cx="1000" cy="200" r="0.9"/><circle cx="1200" cy="350" r="0.4"/><circle cx="1400" cy="100" r="0.6"/><circle cx="1600" cy="250" r="0.5"/><circle cx="1800" cy="500" r="0.8"/><circle cx="100" cy="600" r="0.7"/><circle cx="300" cy="700" r="0.5"/><circle cx="500" cy="900" r="0.9"/><circle cx="700" cy="650" r="0.4"/><circle cx="900" cy="800" r="0.6"/><circle cx="1100" cy="950" r="0.8"/><circle cx="1300" cy="750" r="0.5"/><circle cx="1500" cy="850" r="0.7"/><circle cx="1700" cy="1100" r="0.9"/><circle cx="200" cy="1200" r="0.6"/><circle cx="450" cy="1300" r="0.5"/><circle cx="750" cy="1400" r="0.8"/><circle cx="950" cy="1250" r="0.2"/><circle cx="1250" cy="1350" r="0.7"/><circle cx="1550" cy="1500" r="0.9"/></g></svg>'),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="3000" opacity="0.4"><g fill="white"><circle cx="70" cy="120" r="0.3"/><circle cx="270" cy="220" r="0.5"/><circle cx="470" cy="420" r="0.2"/><circle cx="670" cy="120" r="0.4"/><circle cx="870" cy="520" r="0.6"/><circle cx="1070" cy="320" r="0.3"/><circle cx="1270" cy="470" r="0.5"/><circle cx="1470" cy="170" r="0.2"/><circle cx="1670" cy="370" r="0.4"/><circle cx="1870" cy="620" r="0.6"/><circle cx="170" cy="720" r="0.5"/><circle cx="370" cy="820" r="0.3"/><circle cx="570" cy="1020" r="0.7"/><circle cx="770" cy="770" r="0.2"/><circle cx="970" cy="920" r="0.4"/><circle cx="1170" cy="1070" r="0.6"/><circle cx="1370" cy="870" r="0.3"/><circle cx="1570" cy="970" r="0.5"/><circle cx="1770" cy="1220" r="0.7"/><circle cx="270" cy="1320" r="0.4"/><circle cx="550" cy="1420" r="0.3"/><circle cx="850" cy="1560" r="0.6"/><circle cx="1050" cy="1370" r="0.2"/><circle cx="1350" cy="1470" r="0.5"/><circle cx="1650" cy="1620" r="0.7"/></g></svg>');
-            animation: starsMove 120s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes starsMove {
-            to { transform: translateY(-1000px); }
-        }
-
-        /* Мерцание звёзд */
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="3000"><g fill="white"><circle cx="150" cy="180" r="0.5" opacity="0.5"/><circle cx="650" cy="480" r="0.7" opacity="0.5"/><circle cx="1150" cy="880" r="0.4" opacity="0.5"/><circle cx="1650" cy="1580" r="0.6" opacity="0.5"/></g></svg>');
-            animation: twinkle 4s ease-in-out infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Заголовки */
+        
+        /* Анимированный градиентный заголовок */
         h1 {
-            color: #ffffff;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
             text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 6s ease infinite;
+            background-size: 200% 200%;
         }
-        h2 {
-            color: #6c5ce7;
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            padding-bottom: 0.5rem;
-            position: relative;
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        h2::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, #6c5ce7 0%, transparent 100%);
-        }
-
-        /* Списки с анимированными звёздочками */
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        li::before {
-            content: "✦";
-            position: absolute;
-            left: 0;
-            color: #6c5ce7;
-            font-size: 0.8em;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        /* Подпункты */
-        ul ul li::before {
-            content: "⋆";
-            animation: none;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.6em;
-            top: 0.2em;
-        }
-
-        /* Текст */
-        .highlight {
-            color: #ffffff;
-            font-weight: 500;
-        }
-        .subtext {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-        .section {
-            background: rgba(17, 17, 17, 0.7);
-            border-radius: 8px;
-            padding: 1.2rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.05);
+        
+        /* Категории */
+        .category {
+            background: rgba(15, 10, 26, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
+            border-left: 4px solid var(--neon-purple);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Команды */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
         .command {
-            font-family: monospace;
-            color: #6c5ce7;
-            background: rgba(108, 92, 231, 0.1);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            background: rgba(183, 33, 255, 0.15);
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(183, 33, 255, 0.3);
         }
-
-        @media (max-width: 600px) {
-            body { padding: 1rem; }
+        
+        .command:hover {
+            background: rgba(183, 33, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(183, 33, 255, 0.2);
+            border-color: var(--neon-purple);
+        }
+        
+        /* Подсказки */
+        .hint {
+            text-align: center;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>ЧАТ-БОТ ЗВУКОВ</h1>
-    <p style="text-align: center; color: #aaa; margin-bottom: 2rem;">Активируйте звуки в чате за шармы ✨</p>
-
-    <div class="section">
-        <h2>📢 Как это работает</h2>
-        <ul>
-            <li><span class="highlight">Стоимость озвучки:</span> <span class="command">500 шармов</span></li>
-            <li><span class="highlight">Проверить баланс:</span> напишите в чат <span class="command">!шармы</span></li>
-            <li>Шармы выдаются за активность в чате и на усмотрение стримера</li>
-        </ul>
+    <h1>✨ Чат-бот звуков</h1>
+    <p class="hint">Активируйте звуки в чате за шармы! Проверить баланс: <strong>!шармы</strong></p>
+    
+    <div class="category">
+        <h2 class="category-title">🎤 Приветствия</h2>
+        <div class="commands-grid">
+            <div class="command">!здарова бандиты</div>
+            <div class="command">!здарова чуваки</div>
+            <div class="command">!О привет</div>
+            <div class="command">!здарова отцы</div>
+            <div class="command">!здарова брат</div>
+            <div class="command">!здравствуй брат</div>
+        </div>
     </div>
-
-    <div class="section">
-        <h2>🎤 Приветствия</h2>
-        <ul>
-            <li><span class="command">!здарова бандиты</span></li>
-            <li><span class="command">!здарова чуваки</span></li>
-            <li><span class="command">!О привет</span></li>
-            <li><span class="command">!здарова отцы</span></li>
-            <li><span class="command">!здарова брат</span></li>
-            <li><span class="command">!здравствуй брат</span></li>
-        </ul>
+    
+    <div class="category">
+        <h2 class="category-title">🎭 Популярные фразы</h2>
+        <div class="commands-grid">
+            <div class="command">!база</div>
+            <div class="command">!начальники не опаздывают</div>
+            <div class="command">!вы нас балуете</div>
+            <div class="command">!потерялася</div>
+            <div class="command">!вот это поворот</div>
+            <div class="command">!ду хаст</div>
+            <div class="command">!x-files</div>
+            <div class="command">!гениально</div>
+            <div class="command">!фиаско</div>
+            <div class="command">!хьюстон у нас проблема</div>
+        </div>
     </div>
-
-    <div class="section">
-        <h2>🎭 Популярные фразы</h2>
-        <ul>
-            <li><span class="command">!база</span></li>
-            <li><span class="command">!начальники не опаздывают</span></li>
-            <li><span class="command">!вы нас балуете ваша светлость</span></li>
-            <li><span class="command">!потерялася</span></li>
-            <li><span class="command">!сильно потерялася</span></li>
-            <li><span class="command">!вот это поворот</span></li>
-            <li><span class="command">!совпадение</span></li>
-            <li><span class="command">!ду хаст</span></li>
-            <li><span class="command">!x-files</span></li>
-            <li><span class="command">!великолепный план Уолтер</span></li>
-            <li><span class="command">!просчитался но где</span></li>
-            <li><span class="command">!широкую на широкую</span></li>
-            <li><span class="command">!гениально</span></li>
-            <li><span class="command">!не участвую</span></li>
-            <li><span class="command">!фиаско</span></li>
-            <li><span class="command">!коварный тип</span></li>
-            <li><span class="command">!это безопасно</span> <span class="subtext">(андроид Дэвид)</span></li>
-            <li><span class="command">!хьюстон у нас проблема</span></li>
-        </ul>
+    
+    <div class="category">
+        <h2 class="category-title">🍕 Перерыв</h2>
+        <div class="commands-grid">
+            <div class="command">!пора подкрепиться</div>
+            <div class="command">!пикничок</div>
+            <div class="command">!кофе</div>
+        </div>
     </div>
-
-    <div class="section">
-        <h2>🍕 Перерыв</h2>
-        <ul>
-            <li><span class="command">!пора подкрепиться</span></li>
-            <li><span class="command">!пикничок</span></li>
-            <li><span class="command">!кофе</span></li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>🎬 На конец стрима</h2>
-        <ul>
-            <li><span class="command">!всего хо ро ше го</span></li>
-            <li><span class="command">!все вон</span></li>
-            <li><span class="command">!счастливо братва</span></li>
-            <li><span class="command">!скоро встретимся</span></li>
-            <li><span class="command">!hasta la vista</span></li>
-        </ul>
+    
+    <div class="category">
+        <h2 class="category-title">🌙 На конец стрима</h2>
+        <div class="commands-grid">
+            <div class="command">!всего хорошего</div>
+            <div class="command">!все вон</div>
+            <div class="command">!hasta la vista</div>
+        </div>
     </div>
 </body>
 </html>
