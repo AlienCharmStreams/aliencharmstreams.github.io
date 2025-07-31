@@ -71,6 +71,9 @@
             color: var(--accent-purple);
             font-size: 1.2rem;
             margin: 0.2rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .commands-list {
@@ -87,19 +90,14 @@
             color: var(--neon-white);
             margin-bottom: 0.3rem;
             break-inside: avoid;
-            padding-left: 1rem;
-            position: relative;
-        }
-
-        .command:before {
-            content: "!";
-            position: absolute;
-            left: 0;
-            color: var(--accent-purple);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: all; /* Позволяет копировать команду целиком */
         }
 
         .command:hover {
             text-shadow: 0 0 6px var(--neon-white);
+            background: rgba(108, 92, 231, 0.1);
         }
 
         @media (max-width: 768px) {
@@ -123,93 +121,109 @@
         <div>Проверить баланс: <b>!шармы</b></div>
     </div>
 
+    <!-- Приветствия -->
     <div class="section">
         <h2>🎤 Приветствия</h2>
         <ul class="commands-list">
-            <li class="command">здарова бандиты</li>
-            <li class="command">здарова чуваки</li>
-            <li class="command">О привет</li>
-            <li class="command">здарова отцы</li>
-            <li class="command">здарова брат</li>
-            <li class="command">здравствуй брат</li>
+            <li class="command">!здарова бандиты</li>
+            <li class="command">!здарова чуваки</li>
+            <li class="command">!О привет</li>
+            <li class="command">!здарова отцы</li>
+            <li class="command">!здарова брат</li>
+            <li class="command">!здравствуй брат</li>
         </ul>
     </div>
 
+    <!-- Популярные фразы -->
     <div class="section">
         <h2>🎭 Популярные фразы</h2>
         <ul class="commands-list">
-            <li class="command">база</li>
-            <li class="command">начальники не опаздывают</li>
-            <li class="command">вы нас балуете ваша светлость</li>
-            <li class="command">потерялася</li>
-            <li class="command">сильно потерялася</li>
-            <li class="command">вот это поворот</li>
-            <li class="command">совпадение</li>
-            <li class="command">ду хаст</li>
-            <li class="command">x-files</li>
-            <li class="command">великолепный план Уолтер</li>
-            <li class="command">просчитался но где</li>
-            <li class="command">широкую на широкую</li>
-            <li class="command">гениально</li>
-            <li class="command">не участвую</li>
-            <li class="command">фиаско</li>
-            <li class="command">коварный тип</li>
-            <li class="command">это безопасно (андроид Дэвид)</li>
-            <li class="command">хьюстон у нас проблема</li>
-            <li class="command">сомнительно но окей (с) Тинькофф</li>
-            <li class="command">это было п#здец как смело (с) Тинькофф</li>
-            <li class="command">желаю здоровья и выжить (с) Тинькофф</li>
-            <li class="command">любая миссия (Футурама)</li>
-            <li class="command">бендер</li>
-            <li class="command">I need to meditate (Trevor GTA)</li>
-            <li class="command">I'll be back</li>
-            <li class="command">you died (Dark Souls)</li>
-            <li class="command">мои нервы</li>
-            <li class="command">титры (directed by Robert B. Weide)</li>
-            <li class="command">Ералаш</li>
-            <li class="command">Ямэтэ кудасай</li>
-            <li class="command">хлопики (by Maxim Paimushkin)</li>
-            <li class="command">мы в дерьме (Комиссар Жибер)</li>
-            <li class="command">крик Вильгельма</li>
-            <li class="command">зенитка</li>
-            <li class="command">ножик</li>
-            <li class="command">бонжур (Bad Commedian)</li>
-            <li class="command">дробовики (by Станислав Агафонов)</li>
-            <li class="command">дрын</li>
-            <li class="command">пора подкрепиться</li>
-            <li class="command">пикничок</li>
-            <li class="command">кофе</li>
-            <li class="command">чтооо (вопросительно)</li>
-            <li class="command">да да (иронично)</li>
-            <li class="command">нет</li>
-            <li class="command">hitler nein</li>
-            <li class="command">omg</li>
-            <li class="command">повезло</li>
-            <li class="command">не пройдешь</li>
-            <li class="command">ты пройдешь</li>
-            <li class="command">на нас напали</li>
-            <li class="command">опять разборка</li>
-            <li class="command">галочка</li>
-            <li class="command">пожили и хватит</li>
-            <li class="command">меня убили но я выжил</li>
-            <li class="command">я маслину поймал</li>
-            <li class="command">это жестко</li>
-            <li class="command">святая корова</li>
-            <li class="command">да ладно</li>
-            <li class="command">вонючий случай</li>
-            <li class="command">туды яго</li>
-            <li class="command">опа кого-то хлопнули</li>
-            <li class="command">писюны</li>
-            <li class="command">киборг убийца</li>
-            <li class="command">в очередь</li>
-            <li class="command">полномочия</li>
-            <li class="command">ура заработало</li>
-            <li class="command">убойные каникулы</li>
-            <li class="command">всего хо ро ше го</li>
-            <li class="command">все вон</li>
-            <li class="command">счастливо братва</li>
-            <li class="command">скоро встретимся</li>
-            <li class="command">hasta la vista</li>
+            <li class="command">!база</li>
+            <li class="command">!начальники не опаздывают</li>
+            <li class="command">!вы нас балуете ваша светлость</li>
+            <li class="command">!потерялася</li>
+            <li class="command">!сильно потерялася</li>
+            <li class="command">!вот это поворот</li>
+            <li class="command">!совпадение</li>
+            <li class="command">!ду хаст</li>
+            <li class="command">!x-files</li>
+            <li class="command">!великолепный план Уолтер</li>
+            <li class="command">!просчитался но где</li>
+            <li class="command">!широкую на широкую</li>
+            <li class="command">!гениально</li>
+            <li class="command">!не участвую</li>
+            <li class="command">!фиаско</li>
+            <li class="command">!коварный тип</li>
+        </ul>
+    </div>
+
+    <!-- Кино и игры -->
+    <div class="section">
+        <h2>🎬 Кино и игры</h2>
+        <ul class="commands-list">
+            <li class="command">!это безопасно (андроид Дэвид)</li>
+            <li class="command">!хьюстон у нас проблема</li>
+            <li class="command">!любая миссия (Футурама)</li>
+            <li class="command">!бендер</li>
+            <li class="command">!I need to meditate (Trevor GTA)</li>
+            <li class="command">!I'll be back</li>
+            <li class="command">!you died (Dark Souls)</li>
+            <li class="command">!титры (directed by Robert B. Weide)</li>
+            <li class="command">!Ералаш</li>
+        </ul>
+    </div>
+
+    <!-- Реакции -->
+    <div class="section">
+        <h2>😄 Реакции</h2>
+        <ul class="commands-list">
+            <li class="command">!чтооо (вопросительно)</li>
+            <li class="command">!да да (иронично)</li>
+            <li class="command">!нет</li>
+            <li class="command">!hitler nein</li>
+            <li class="command">!omg</li>
+            <li class="command">!повезло</li>
+            <li class="command">!не пройдешь</li>
+            <li class="command">!ты пройдешь</li>
+            <li class="command">!святая корова</li>
+            <li class="command">!да ладно</li>
+        </ul>
+    </div>
+
+    <!-- Боевые -->
+    <div class="section">
+        <h2>🔫 Боевые</h2>
+        <ul class="commands-list">
+            <li class="command">!зенитка</li>
+            <li class="command">!ножик</li>
+            <li class="command">!бонжур (Bad Commedian)</li>
+            <li class="command">!дробовики (by Станислав Агафонов)</li>
+            <li class="command">!дрын</li>
+            <li class="command">!на нас напали</li>
+            <li class="command">!опять разборка</li>
+            <li class="command">!киборг убийца</li>
+        </ul>
+    </div>
+
+    <!-- Перерыв -->
+    <div class="section">
+        <h2>🍕 Перерыв</h2>
+        <ul class="commands-list">
+            <li class="command">!пора подкрепиться</li>
+            <li class="command">!пикничок</li>
+            <li class="command">!кофе</li>
+        </ul>
+    </div>
+
+    <!-- Прощания -->
+    <div class="section">
+        <h2>👋 Прощания</h2>
+        <ul class="commands-list">
+            <li class="command">!всего хо ро ше го</li>
+            <li class="command">!все вон</li>
+            <li class="command">!счастливо братва</li>
+            <li class="command">!скоро встретимся</li>
+            <li class="command">!hasta la vista</li>
         </ul>
     </div>
 </body>
