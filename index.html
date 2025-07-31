@@ -24,6 +24,42 @@
             overflow-x: hidden;
         }
 
+        /* Анимация падающих звёзд */
+        .falling-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            filter: blur(0.5px);
+            animation: fall linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) translateX(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            70% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Статичные звёзды фона */
         body::before {
             content: "";
             position: fixed;
@@ -32,16 +68,12 @@
             width: 100%;
             height: 100%;
             background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" opacity="0.7"><circle cx="100" cy="150" r="2.5" fill="white"/><circle cx="400" cy="300" r="3" fill="white"/><circle cx="700" cy="50" r="2" fill="white"/><circle cx="900" cy="400" r="2.8" fill="white"/><circle cx="1200" cy="200" r="3.2" fill="white"/><circle cx="1500" cy="350" r="2.3" fill="white"/><circle cx="200" cy="600" r="3" fill="white"/><circle cx="500" cy="750" r="2.5" fill="white"/><circle cx="800" cy="900" r="3.5" fill="white"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" opacity="0.7"><circle cx="100" cy="150" r="1.5" fill="white"/><circle cx="400" cy="300" r="2" fill="white"/><circle cx="700" cy="50" r="1.2" fill="white"/><circle cx="900" cy="400" r="1.8" fill="white"/><circle cx="1200" cy="200" r="2.2" fill="white"/><circle cx="1500" cy="350" r="1.3" fill="white"/><circle cx="200" cy="600" r="2" fill="white"/><circle cx="500" cy="750" r="1.5" fill="white"/><circle cx="800" cy="900" r="2.5" fill="white"/></svg>'),
                 linear-gradient(to bottom, #0a0a0a 0%, #1a1a2e 100%);
-            z-index: -1;
-            animation: starsMove 120s linear infinite;
+            z-index: -2;
         }
 
-        @keyframes starsMove {
-            to { transform: translateY(-500px); }
-        }
-
+        /* Контент */
         h1 {
             color: var(--neon-white);
             font-size: 2rem;
@@ -57,6 +89,7 @@
             margin: 0.5rem 0 1rem;
             border-left: 2px solid var(--accent-purple);
             font-size: 0.9rem;
+            backdrop-filter: blur(2px);
         }
 
         .section {
@@ -65,6 +98,7 @@
             padding: 0.8rem;
             margin-bottom: 1rem;
             border: 1px solid #333;
+            backdrop-filter: blur(2px);
         }
 
         h2 {
@@ -92,12 +126,14 @@
             break-inside: avoid;
             transition: all 0.3s ease;
             cursor: pointer;
-            user-select: all; /* Позволяет копировать команду целиком */
+            user-select: all;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
         }
 
         .command:hover {
             text-shadow: 0 0 6px var(--neon-white);
-            background: rgba(108, 92, 231, 0.1);
+            background: rgba(108, 92, 231, 0.15);
         }
 
         @media (max-width: 768px) {
@@ -114,14 +150,19 @@
     </style>
 </head>
 <body>
+    <!-- Падающие звёзды -->
+    <div class="falling-stars" id="fallingStars"></div>
+
+    <!-- Основной контент -->
     <h1>ЧАТ-БОТ ЗВУКОВ</h1>
     
     <div class="info-block">
         <div>Стоимость озвучки: <b>500 шармов</b></div>
         <div>Проверить баланс: <b>!шармы</b></div>
+        <div>Шармы выдаются за активность в чате</div>
     </div>
 
-    <!-- Приветствия -->
+    <!-- Категории команд -->
     <div class="section">
         <h2>🎤 Приветствия</h2>
         <ul class="commands-list">
@@ -134,7 +175,6 @@
         </ul>
     </div>
 
-    <!-- Популярные фразы -->
     <div class="section">
         <h2>🎭 Популярные фразы</h2>
         <ul class="commands-list">
@@ -154,43 +194,26 @@
             <li class="command">!не участвую</li>
             <li class="command">!фиаско</li>
             <li class="command">!коварный тип</li>
-        </ul>
-    </div>
-
-    <!-- Кино и игры -->
-    <div class="section">
-        <h2>🎬 Кино и игры</h2>
-        <ul class="commands-list">
             <li class="command">!это безопасно (андроид Дэвид)</li>
             <li class="command">!хьюстон у нас проблема</li>
+            <li class="command">!сомнительно но окей (с) Тинькофф</li>
+            <li class="command">!это было п#здец как смело (с) Тинькофф</li>
+            <li class="command">!желаю здоровья и выжить (с) Тинькофф</li>
             <li class="command">!любая миссия (Футурама)</li>
             <li class="command">!бендер</li>
             <li class="command">!I need to meditate (Trevor GTA)</li>
             <li class="command">!I'll be back</li>
             <li class="command">!you died (Dark Souls)</li>
+            <li class="command">!мои нервы</li>
             <li class="command">!титры (directed by Robert B. Weide)</li>
             <li class="command">!Ералаш</li>
+            <li class="command">!Ямэтэ кудасай</li>
+            <li class="command">!хлопики (by Maxim Paimushkin)</li>
+            <li class="command">!мы в дерьме (Комиссар Жибер)</li>
+            <li class="command">!крик Вильгельма</li>
         </ul>
     </div>
 
-    <!-- Реакции -->
-    <div class="section">
-        <h2>😄 Реакции</h2>
-        <ul class="commands-list">
-            <li class="command">!чтооо (вопросительно)</li>
-            <li class="command">!да да (иронично)</li>
-            <li class="command">!нет</li>
-            <li class="command">!hitler nein</li>
-            <li class="command">!omg</li>
-            <li class="command">!повезло</li>
-            <li class="command">!не пройдешь</li>
-            <li class="command">!ты пройдешь</li>
-            <li class="command">!святая корова</li>
-            <li class="command">!да ладно</li>
-        </ul>
-    </div>
-
-    <!-- Боевые -->
     <div class="section">
         <h2>🔫 Боевые</h2>
         <ul class="commands-list">
@@ -205,7 +228,6 @@
         </ul>
     </div>
 
-    <!-- Перерыв -->
     <div class="section">
         <h2>🍕 Перерыв</h2>
         <ul class="commands-list">
@@ -215,9 +237,37 @@
         </ul>
     </div>
 
-    <!-- Прощания -->
     <div class="section">
-        <h2>👋 Прощания</h2>
+        <h2>😄 Реакции</h2>
+        <ul class="commands-list">
+            <li class="command">!чтооо (вопросительно)</li>
+            <li class="command">!да да (иронично)</li>
+            <li class="command">!нет</li>
+            <li class="command">!hitler nein</li>
+            <li class="command">!omg</li>
+            <li class="command">!повезло</li>
+            <li class="command">!не пройдешь</li>
+            <li class="command">!ты пройдешь</li>
+            <li class="command">!галочка</li>
+            <li class="command">!пожили и хватит</li>
+            <li class="command">!меня убили но я выжил</li>
+            <li class="command">!я маслину поймал</li>
+            <li class="command">!это жестко</li>
+            <li class="command">!святая корова</li>
+            <li class="command">!да ладно</li>
+            <li class="command">!вонючий случай</li>
+            <li class="command">!туды яго</li>
+            <li class="command">!опа кого-то хлопнули</li>
+            <li class="command">!писюны</li>
+            <li class="command">!в очередь</li>
+            <li class="command">!полномочия</li>
+            <li class="command">!ура заработало</li>
+            <li class="command">!убойные каникулы</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>👋 Завершение стрима</h2>
         <ul class="commands-list">
             <li class="command">!всего хо ро ше го</li>
             <li class="command">!все вон</li>
@@ -226,5 +276,39 @@
             <li class="command">!hasta la vista</li>
         </ul>
     </div>
+
+    <script>
+        // Создание падающих звёзд
+        function createStars() {
+            const container = document.getElementById('fallingStars');
+            const starCount = 12;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 1.5 + 0.5;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 15;
+                const opacity = Math.random() * 0.7 + 0.1;
+                const blur = Math.random() * 0.8;
+                
+                star.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${posX}%;
+                    animation-delay: ${delay}s;
+                    animation-duration: ${duration}s;
+                    opacity: ${opacity};
+                    filter: blur(${blur}px);
+                `;
+                
+                container.appendChild(star);
+            }
+        }
+
+        window.addEventListener('load', createStars);
+    </script>
 </body>
 </html>
