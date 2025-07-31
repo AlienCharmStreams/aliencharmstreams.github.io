@@ -6,17 +6,17 @@
     <title>Чат-бот звуков | AlienCharm</title>
     <style>
         :root {
-            --neon-blue: #21d4fd;
-            --neon-pink: #ff2ced;
-            --bg-dark: #0a0615;
-            --text-light: #ffffff;
+            --neon-white: #f0f0ff;
+            --accent-purple: #6c5ce7;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(17, 17, 17, 0.8);
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.4;
+            color: #e0e0e0;
+            line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
             padding: 1rem;
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* Космический фон */
+        /* Крупные звёзды на фоне */
         body::before {
             content: "";
             position: fixed;
@@ -33,130 +33,137 @@
             width: 100%;
             height: 100%;
             background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" opacity="0.8"><circle cx="100" cy="150" r="2" fill="white"/><circle cx="400" cy="300" r="1.5" fill="white"/><circle cx="700" cy="50" r="3" fill="white"/><circle cx="900" cy="400" r="2" fill="white"/><circle cx="1200" cy="200" r="1.8" fill="white"/><circle cx="1500" cy="350" r="2.5" fill="white"/></svg>'),
-                linear-gradient(to bottom, #0a0615 0%, #1a0a2e 100%);
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" opacity="0.7"><circle cx="100" cy="150" r="2.5" fill="white"/><circle cx="400" cy="300" r="3" fill="white"/><circle cx="700" cy="50" r="2" fill="white"/><circle cx="900" cy="400" r="2.8" fill="white"/><circle cx="1200" cy="200" r="3.2" fill="white"/><circle cx="1500" cy="350" r="2.3" fill="white"/><circle cx="200" cy="600" r="3" fill="white"/><circle cx="500" cy="750" r="2.5" fill="white"/><circle cx="800" cy="900" r="3.5" fill="white"/></svg>'),
+                linear-gradient(to bottom, #0a0a0a 0%, #1a1a2e 100%);
             z-index: -1;
-            animation: starsMove 100s linear infinite;
+            animation: starsMove 120s linear infinite;
         }
 
         @keyframes starsMove {
             to { transform: translateY(-500px); }
         }
 
-        /* Мерцание звёзд */
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* Заголовок */
         h1 {
-            text-align: center;
+            color: var(--neon-white);
             font-size: 2.2rem;
-            margin: 0.5rem 0;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(33, 212, 253, 0.5);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(240, 240, 255, 0.3);
         }
 
-        /* Таблица команд */
-        .commands-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0.5rem 0;
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 1.5rem;
         }
 
-        .commands-table th {
-            background: rgba(33, 212, 253, 0.1);
-            color: var(--neon-blue);
-            padding: 0.5rem;
-            text-align: left;
-            font-size: 1.2rem;
-            border-bottom: 2px solid var(--neon-blue);
+        /* Карточки категорий */
+        .section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid #333;
         }
 
-        .commands-table td {
-            padding: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 1.1rem;
+        h2 {
+            color: var(--accent-purple);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
         }
 
-        /* Команды */
+        /* Список команд */
+        .commands-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 0.8rem;
+            padding: 0;
+            list-style: none;
+        }
+
         .command {
             font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            color: var(--neon-pink);
-            cursor: pointer;
-            transition: all 0.2s;
+            font-size: 1.15rem;
+            color: var(--neon-white);
+            padding: 0.6rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 1.2rem;
         }
 
         .command:hover {
-            text-shadow: 0 0 8px var(--neon-pink);
+            text-shadow: 0 0 8px var(--neon-white);
+            background: rgba(108, 92, 231, 0.1);
         }
 
-        /* Категории */
-        .category {
-            margin: 1rem 0;
-            background: rgba(10, 6, 21, 0.7);
-            border-radius: 8px;
-            padding: 0.5rem;
+        .command:before {
+            content: "!";
+            position: absolute;
+            left: 0.2rem;
+            color: var(--accent-purple);
+            font-weight: bold;
         }
 
-        /* Аудиоплеер */
-        audio { display: none; }
+        @media (max-width: 600px) {
+            .commands-list {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>✨ Чат-бот звуков</h1>
-    <p style="text-align: center; color: #a0a0a0; margin: 0.5rem 0 1rem;">Кликните на команду для воспроизведения</p>
+    <h1>ЧАТ-БОТ ЗВУКОВ</h1>
+    <p class="subtitle">Активируйте звуки в чате за шармы • 500 шармов за воспроизведение</p>
 
-    <div class="category">
-        <table class="commands-table">
-            <thead>
-                <tr>
-                    <th colspan="2">🎤 Приветствия</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="command" onclick="playSound('sounds/zdrawa_bandity.mp3')">!здарова бандиты</td>
-                    <td class="command" onclick="playSound('sounds/zdrawa_chuvaki.mp3')">!здарова чуваки</td>
-                </tr>
-                <tr>
-                    <td class="command" onclick="playSound('sounds/o_privet.mp3')">!О привет</td>
-                    <td class="command" onclick="playSound('sounds/zdrawa_otcy.mp3')">!здарова отцы</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="section">
+        <h2>🎤 Приветствия</h2>
+        <ul class="commands-list">
+            <li class="command">здарова бандиты</li>
+            <li class="command">здарова чуваки</li>
+            <li class="command">О привет</li>
+            <li class="command">здарова отцы</li>
+            <li class="command">здарова брат</li>
+            <li class="command">здравствуй брат</li>
+        </ul>
     </div>
 
-    <div class="category">
-        <table class="commands-table">
-            <thead>
-                <tr>
-                    <th colspan="2">🎭 Популярные фразы</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="command" onclick="playSound('sounds/baza.mp3')">!база</td>
-                    <td class="command" onclick="playSound('sounds/nachalniki.mp3')">!начальники не опаздывают</td>
-                </tr>
-                <tr>
-                    <td class="command" onclick="playSound('sounds/vot_povorot.mp3')">!вот это поворот</td>
-                    <td class="command" onclick="playSound('sounds/genialno.mp3')">!гениально</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="section">
+        <h2>🎭 Популярные фразы</h2>
+        <ul class="commands-list">
+            <li class="command">база</li>
+            <li class="command">начальники не опаздывают</li>
+            <li class="command">вы нас балуете ваша светлость</li>
+            <li class="command">потерялася</li>
+            <li class="command">сильно потерялася</li>
+            <li class="command">вот это поворот</li>
+            <li class="command">совпадение</li>
+            <li class="command">ду хаст</li>
+            <li class="command">x-files</li>
+        </ul>
     </div>
 
-    <audio id="audio-player"></audio>
+    <div class="section">
+        <h2>🍕 Перерыв</h2>
+        <ul class="commands-list">
+            <li class="command">пора подкрепиться</li>
+            <li class="command">пикничок</li>
+            <li class="command">кофе</li>
+        </ul>
+    </div>
 
-    <script>
-        function playSound(soundFile) {
-            const audio = document.getElementById('audio-player');
-            audio.src = soundFile;
-            audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
-        }
-    </script>
+    <div class="section">
+        <h2>🌙 На конец стрима</h2>
+        <ul class="commands-list">
+            <li class="command">всего хо ро ше го</li>
+            <li class="command">все вон</li>
+            <li class="command">счастливо братва</li>
+            <li class="command">hasta la vista</li>
+        </ul>
+    </div>
 </body>
 </html>
