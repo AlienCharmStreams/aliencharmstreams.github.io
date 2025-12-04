@@ -147,6 +147,42 @@
             background: rgba(108, 92, 231, 0.1);
         }
 
+        /* Блок с розыгрышами (всегда видимый) */
+        .giveaway-block {
+            background: rgba(255, 193, 7, 0.08);
+            border-left: 2px solid #ffcc00;
+            padding: 0.6rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+
+        .giveaway-title {
+            color: #ffcc00;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .giveaway-date {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0.5rem 0;
+            padding: 0.3rem;
+            background: rgba(255, 193, 7, 0.15);
+            border-radius: 4px;
+        }
+
+        .giveaway-conditions {
+            font-size: 0.85rem;
+            color: #ffdd99;
+            line-height: 1.4;
+        }
+
         /* Нижняя часть (раскрываемая) */
         .info-bottom {
             max-height: 0;
@@ -156,7 +192,7 @@
         }
 
         .info-bottom.expanded {
-            max-height: 600px;
+            max-height: 400px;
             margin-top: 0.8rem;
         }
 
@@ -222,20 +258,6 @@
             border-radius: 3px;
             margin: 0.3rem 0;
             display: inline-block;
-        }
-
-        .conditions-list {
-            list-style: none;
-            padding: 0;
-            margin: 0.5rem 0;
-        }
-
-        .condition-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            margin-bottom: 0.3rem;
-            font-size: 0.9rem;
         }
 
         .highlight-text {
@@ -354,8 +376,18 @@
             
             <button class="info-toggle" id="toggleDetails">
                 <span>🔽</span>
-                <span>Подробнее о системе</span>
+                <span>Как заработать шармы?</span>
             </button>
+        </div>
+        
+        <!-- Блок с розыгрышами (всегда видимый) -->
+        <div class="giveaway-block">
+            <div class="giveaway-title">🎁 РОЗЫГРЫШИ ПРОХОЖДЕНИЙ ИГР</div>
+            <div class="giveaway-date">🎄 Следующий розыгрыш — 31 декабря!</div>
+            <div class="giveaway-conditions">
+                Участвуют зрители с балансом от <span class="highlight">40,000+ шармов</span><br>
+                Расширенный розыгрыш: от <span class="highlight">100,000+ шармов</span>
+            </div>
         </div>
         
         <!-- Нижняя часть (раскрываемая) -->
@@ -402,38 +434,6 @@
                     <div class="command-example">!звук [название]</div>
                     <div class="section-text">
                         🎶 Библиотека звуков представлена ниже
-                    </div>
-                </div>
-                
-                <!-- Розыгрыши -->
-                <div class="info-section">
-                    <div class="section-title">🎁 РОЗЫГРЫШИ ПРОХОЖДЕНИЙ ИГР</div>
-                    <div class="section-text">
-                        Пару раз в сезон я провожу розыгрыши среди самых активных участников чата!
-                    </div>
-                    
-                    <div class="section-title" style="font-size: 0.9rem; margin-top: 0.5rem;">Условия участия:</div>
-                    <ul class="conditions-list">
-                        <li class="condition-item">
-                            <span class="charm-emoji">▫️🥉</span>
-                            <span><span class="highlight-text">Базовый розыгрыш:</span> баланс от <span class="highlight-text">40,000+ шармов</span></span>
-                        </li>
-                        <li class="condition-item">
-                            <span class="charm-emoji">▫️🥇</span>
-                            <span><span class="highlight-text">Расширенный розыгрыш:</span> баланс от <span class="highlight-text">100,000+ шармов</span></span>
-                        </li>
-                        <li class="condition-item">
-                            <span class="charm-emoji">▫️</span>
-                            <span>Быть подписанным на канал</span>
-                        </li>
-                        <li class="condition-item">
-                            <span class="charm-emoji">▫️</span>
-                            <span>Соблюдать правила чата</span>
-                        </li>
-                    </ul>
-                    
-                    <div class="section-text" style="margin-top: 0.5rem;">
-                        <span class="highlight-text">🎄 Ближайший розыгрыш — 31 декабря!</span>
                     </div>
                 </div>
             </div>
@@ -593,10 +593,10 @@
             
             if (isExpanded) {
                 details.classList.remove('expanded');
-                this.innerHTML = '<span>🔽</span><span>Подробнее о системе</span>';
+                this.innerHTML = '<span>🔽</span><span>Как заработать шармы?</span>';
             } else {
                 details.classList.add('expanded');
-                this.innerHTML = '<span>🔼</span><span>Скрыть подробности</span>';
+                this.innerHTML = '<span>🔼</span><span>Скрыть детали</span>';
             }
         });
 
