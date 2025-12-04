@@ -80,6 +80,19 @@
             text-align: center;
             margin: 0.3rem 0;
             text-shadow: 0 0 8px rgba(240, 240, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        h1 .music-icon {
+            animation: musicBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes musicBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-3px) scale(1.1); }
         }
 
         /* ОБНОВЛЁННЫЙ ИНФО-БЛОК */
@@ -127,6 +140,7 @@
             align-items: center;
             gap: 0.3rem;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .info-toggle:hover {
@@ -142,47 +156,91 @@
         }
 
         .info-bottom.expanded {
-            max-height: 500px;
+            max-height: 600px;
             margin-top: 0.8rem;
         }
 
         .info-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.8rem;
             padding-top: 0.8rem;
             border-top: 1px solid #333;
         }
 
-        .detail-section {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.6rem;
-            border-radius: 4px;
-            border-left: 2px solid rgba(108, 92, 231, 0.5);
+        .info-section {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .detail-title {
+        .info-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
             color: var(--accent-purple);
             font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .section-text {
             font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
         }
 
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.85rem;
-            margin-bottom: 0.2rem;
-            padding-left: 0.5rem;
+        .charm-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
         }
 
-        .detail-emoji {
-            min-width: 1.2em;
+        .charm-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .charm-emoji {
+            min-width: 1.3em;
             text-align: center;
+            margin-top: 0.1rem;
+        }
+
+        .command-example {
+            font-family: 'Courier New', monospace;
+            color: var(--neon-white);
+            background: rgba(108, 92, 231, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            margin: 0.3rem 0;
+            display: inline-block;
+        }
+
+        .conditions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .condition-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .highlight-text {
+            color: var(--neon-white);
+            font-weight: 500;
         }
 
         /* Секции с командами (без изменений) */
@@ -255,15 +313,15 @@
                 align-items: flex-start;
                 gap: 0.3rem;
             }
-            
-            .info-details {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 480px) {
             .commands-list {
                 columns: 1;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
             }
         }
     </style>
@@ -273,15 +331,20 @@
     <div class="falling-stars" id="fallingStars"></div>
 
     <!-- Основной контент -->
-    <h1>ЧАТ-БОТ ЗВУКОВ</h1>
+    <h1><span class="music-icon">🎵</span> ЗВУКОВОЙ БОТ ЧАТА</h1>
     
     <!-- ОБНОВЛЁННЫЙ ИНФО-БЛОК -->
     <div class="info-block">
         <!-- Верхняя часть (всегда видимая) -->
         <div class="info-top">
             <div class="info-item">
-                <span class="info-emoji">🎮</span>
-                <span>Активируйте звуки за <span class="highlight">500 шармов</span></span>
+                <span class="info-emoji">🤖</span>
+                <span>Шармы = активность в чате</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-emoji">💰</span>
+                <span>Стоимость звука: <span class="highlight">500 шармов</span></span>
             </div>
             
             <div class="info-item">
@@ -289,84 +352,88 @@
                 <span>Баланс: <span class="mono">!шармы</span></span>
             </div>
             
-            <div class="info-item">
-                <span class="info-emoji">🎁</span>
-                <span>Розыгрыш: <span class="highlight">31 декабря</span></span>
-            </div>
-            
             <button class="info-toggle" id="toggleDetails">
                 <span>🔽</span>
-                <span>Подробнее</span>
+                <span>Подробнее о системе</span>
             </button>
         </div>
         
         <!-- Нижняя часть (раскрываемая) -->
         <div class="info-bottom" id="infoDetails">
             <div class="info-details">
+                <!-- Шапка -->
+                <div class="section-text">
+                    У нас в чате живёт специальный бот, который превращает вашу активность в валюту — <span class="highlight-text">Шармы!</span>
+                </div>
+                
+                <div class="section-text">
+                    Чем вы активнее, тем больше шармов получаете:
+                </div>
+                
                 <!-- Как заработать шармы -->
-                <div class="detail-section">
-                    <div class="detail-title">
-                        <span>💎</span>
-                        <span>Как заработать шармы:</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">💬</span>
-                        <span><span class="highlight">+20</span> за сообщение</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">🤍</span>
-                        <span><span class="highlight">100 лайков</span> = 1000 шармов</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">✨</span>
-                        <span><span class="highlight">+500</span> за каждые 50 лайков</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">🎉</span>
-                        <span>Бонусы за активности</span>
-                    </div>
+                <div class="info-section">
+                    <div class="section-title">💎 КАК ЗАРАБАТЫВАТЬ ШАРМЫ:</div>
+                    <ul class="charm-list">
+                        <li class="charm-item">
+                            <span class="charm-emoji">▫️💬</span>
+                            <span><span class="highlight-text">+20 шармов</span> за каждое ваше сообщение</span>
+                        </li>
+                        <li class="charm-item">
+                            <span class="charm-emoji">▫️🤍</span>
+                            <span>На <span class="highlight-text">100 лайков</span> на стриме — раздача <span class="highlight-text">1000 шармов</span></span>
+                        </li>
+                        <li class="charm-item">
+                            <span class="charm-emoji">▫️✨</span>
+                            <span><span class="highlight-text">+500 шармов</span> за каждые следующие <span class="highlight-text">50 лайков</span></span>
+                        </li>
+                        <li class="charm-item">
+                            <span class="charm-emoji">▫️🎉</span>
+                            <span><span class="highlight-text">Дополнительные бонусы</span> за участие в активностях и конкурсах</span>
+                        </li>
+                    </ul>
                 </div>
                 
                 <!-- Как использовать звуки -->
-                <div class="detail-section">
-                    <div class="detail-title">
-                        <span>🔊</span>
-                        <span>Как использовать звуки:</span>
+                <div class="info-section">
+                    <div class="section-title">🔊 КАК ИСПОЛЬЗОВАТЬ ЗВУКОВЫЕ КОМАНДЫ</div>
+                    <div class="section-text">
+                        Каждый звук стоит <span class="highlight-text">500 шармов</span>. Напишите команду в чат — и звук прозвучит на стриме!
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">▶️</span>
-                        <span>Напишите в чат:</span>
-                    </div>
-                    <div style="margin: 0.3rem 0 0.3rem 1.5rem;">
-                        <span class="mono">!звук [название]</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">💡</span>
-                        <span>Пример: <span class="mono">!звук база</span></span>
+                    <div class="command-example">!звук [название]</div>
+                    <div class="section-text">
+                        🎶 Библиотека звуков представлена ниже
                     </div>
                 </div>
                 
                 <!-- Розыгрыши -->
-                <div class="detail-section">
-                    <div class="detail-title">
-                        <span>🏆</span>
-                        <span>Розыгрыши игр:</span>
+                <div class="info-section">
+                    <div class="section-title">🎁 РОЗЫГРЫШИ ПРОХОЖДЕНИЙ ИГР</div>
+                    <div class="section-text">
+                        Пару раз в сезон я провожу розыгрыши среди самых активных участников чата!
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">🥉</span>
-                        <span>Базовый: <span class="highlight">40,000+</span> шармов</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">🥇</span>
-                        <span>Расширенный: <span class="highlight">100,000+</span> шармов</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">✓</span>
-                        <span>Подписка на канал</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-emoji">✓</span>
-                        <span>Соблюдение правил</span>
+                    
+                    <div class="section-title" style="font-size: 0.9rem; margin-top: 0.5rem;">Условия участия:</div>
+                    <ul class="conditions-list">
+                        <li class="condition-item">
+                            <span class="charm-emoji">▫️🥉</span>
+                            <span><span class="highlight-text">Базовый розыгрыш:</span> баланс от <span class="highlight-text">40,000+ шармов</span></span>
+                        </li>
+                        <li class="condition-item">
+                            <span class="charm-emoji">▫️🥇</span>
+                            <span><span class="highlight-text">Расширенный розыгрыш:</span> баланс от <span class="highlight-text">100,000+ шармов</span></span>
+                        </li>
+                        <li class="condition-item">
+                            <span class="charm-emoji">▫️</span>
+                            <span>Быть подписанным на канал</span>
+                        </li>
+                        <li class="condition-item">
+                            <span class="charm-emoji">▫️</span>
+                            <span>Соблюдать правила чата</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="section-text" style="margin-top: 0.5rem;">
+                        <span class="highlight-text">🎄 Ближайший розыгрыш — 31 декабря!</span>
                     </div>
                 </div>
             </div>
@@ -526,10 +593,10 @@
             
             if (isExpanded) {
                 details.classList.remove('expanded');
-                this.innerHTML = '<span>🔽</span><span>Подробнее</span>';
+                this.innerHTML = '<span>🔽</span><span>Подробнее о системе</span>';
             } else {
                 details.classList.add('expanded');
-                this.innerHTML = '<span>🔼</span><span>Скрыть</span>';
+                this.innerHTML = '<span>🔼</span><span>Скрыть подробности</span>';
             }
         });
 
