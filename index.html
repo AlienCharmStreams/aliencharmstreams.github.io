@@ -136,6 +136,31 @@
             background: rgba(108, 92, 231, 0.15);
         }
 
+        /* Стили для нового контента */
+        .info-item {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .info-item::before {
+            content: "▫️";
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight {
+            color: var(--neon-white);
+            font-weight: 500;
+        }
+
+        .charm-icon {
+            display: inline-block;
+            margin-right: 0.3rem;
+            width: 1.2em;
+            text-align: center;
+        }
+
         @media (max-width: 768px) {
             .commands-list {
                 columns: 2;
@@ -156,13 +181,77 @@
     <!-- Основной контент -->
     <h1>ЧАТ-БОТ ЗВУКОВ</h1>
     
+    <!-- Обновлённый информационный блок -->
     <div class="info-block">
-        <div>Стоимость озвучки: <b>500 шармов</b></div>
-        <div>Проверить баланс: <b>!шармы</b></div>
-        <div>Шармы выдаются за активность в чате</div>
+        <div style="margin-bottom: 0.8rem; color: #f0f0ff; font-weight: 500;">
+            У нас в чате живёт специальный бот, который превращает вашу активность в валюту — <span class="highlight">Шармы!</span>
+        </div>
+        
+        <div style="margin-bottom: 0.8rem; color: #ccc;">
+            Чем вы активнее, тем больше шармов получаете:
+        </div>
+        
+        <div style="color: var(--accent-purple); font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">
+            💎 КАК ЗАРАБАТЫВАТЬ ШАРМЫ:
+        </div>
+        
+        <div class="info-item">
+            <span class="charm-icon">💬</span>
+            <span class="highlight">+20 шармов</span> за каждое ваше сообщение
+        </div>
+        
+        <div class="info-item">
+            <span class="charm-icon">🤍</span>
+            На <span class="highlight">100 лайков</span> на стриме — раздача <span class="highlight">1000 шармов</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="charm-icon">✨</span>
+            <span class="highlight">+500 шармов</span> за каждые следующие <span class="highlight">50 лайков</span>
+        </div>
+        
+        <div class="info-item">
+            <span class="charm-icon">🎉</span>
+            <span class="highlight">Дополнительные бонусы</span> за участие в активностях и конкурсах
+        </div>
+        
+        <div style="margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid #333;">
+            <span class="highlight">Проверить баланс:</span> напишите в чате команду <span style="font-family: 'Courier New', monospace; color: var(--neon-white); background: rgba(108, 92, 231, 0.1); padding: 0.1rem 0.3rem; border-radius: 3px;">!Шармы</span>
+        </div>
+        
+        <div style="margin-top: 0.8rem; color: var(--accent-purple); font-weight: 500; font-size: 0.95rem;">
+            🔊 КАК ИСПОЛЬЗОВАТЬ ЗВУКОВЫЕ КОМАНДЫ
+        </div>
+        
+        <div style="margin: 0.5rem 0; color: #ccc;">
+            Каждый звук стоит <span class="highlight">500 шармов</span>. Напишите команду в чат — и звук прозвучит на стриме!
+        </div>
+        
+        <div style="font-family: 'Courier New', monospace; color: var(--neon-white); background: rgba(108, 92, 231, 0.1); padding: 0.2rem 0.4rem; border-radius: 3px; display: inline-block; margin-bottom: 0.5rem;">
+            !звук [название]
+        </div>
+        
+        <div style="margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid #333;">
+            <div style="color: var(--accent-purple); font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                🎁 РОЗЫГРЫШИ ПРОХОЖДЕНИЙ ИГР
+            </div>
+            
+            <div style="color: #ccc; margin-bottom: 0.5rem;">
+                Пару раз в сезон я провожу розыгрыши среди самых активных участников чата!
+            </div>
+            
+            <div class="info-item">🥉 <span class="highlight">Базовый розыгрыш:</span> баланс от <span class="highlight">40,000+ шармов</span></div>
+            <div class="info-item">🥇 <span class="highlight">Расширенный розыгрыш:</span> баланс от <span class="highlight">100,000+ шармов</span></div>
+            <div class="info-item">✓ Быть подписанным на канал</div>
+            <div class="info-item">✓ Соблюдать правила чата</div>
+            
+            <div style="margin-top: 0.8rem; color: #f0f0ff; font-weight: 500;">
+                🎄 Ближайший розыгрыш — 31 декабря!
+            </div>
+        </div>
     </div>
 
-    <!-- Категории команд -->
+    <!-- Категории команд (без изменений) -->
     <div class="section">
         <h2>🎤 Приветствия</h2>
         <ul class="commands-list">
