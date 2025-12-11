@@ -369,11 +369,12 @@
             break-inside: avoid;
             transition: all 0.3s ease;
             cursor: pointer;
-            user-select: all;
+            user-select: none;
             padding: 0.1rem 0.3rem;
             border-radius: 3px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid transparent;
+            position: relative;
         }
 
         .command:hover {
@@ -381,6 +382,28 @@
             background: rgba(108, 92, 231, 0.2);
             border-color: rgba(108, 92, 231, 0.4);
             transform: translateX(2px);
+        }
+
+        /* Стиль для уведомления о копировании */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(108, 92, 231, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            z-index: 1000;
+            animation: fadeInOut 2s ease;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
         }
 
         /* Хелперы */
@@ -419,12 +442,24 @@
             h1 {
                 font-size: 1.7rem;
             }
+            
+            .copy-notification {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Падающие звёзды - БОЛЬШЕ ЗВЁЗД -->
     <div class="falling-stars" id="fallingStars"></div>
+    
+    <!-- Уведомление о копировании (скрыто изначально) -->
+    <div id="copyNotification" class="copy-notification" style="display: none;">
+        Команда скопирована в буфер обмена!
+    </div>
 
     <!-- Основной контент -->
     <h1><span class="music-icon">🎵</span> ЧАТ-БОТ ЗВУКОВ</h1>
@@ -510,6 +545,9 @@
                     <div class="command-example">!название</div>
                     <div class="section-text">
                         🎶 Библиотека звуков представлена ниже
+                    </div>
+                    <div class="section-text" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent-purple);">
+                        💡 <strong>Кликните</strong> на любую команду ниже, чтобы скопировать её в буфер обмена!
                     </div>
                 </div>
             </div>
@@ -676,7 +714,10 @@
             }
         });
 
-        window.addEventListener('load', createStars);
-    </script>
-</body>
-</html>
+        // Функция для копирования команды
+        function copyCommandToClipboard(commandText) {
+            // Убираем всё, что идет после квадратных скобок (включая сами скобки)
+            const cleanCommand = commandText.split(' [')[0].trim();
+            
+            // Используем современный Clipboard API
+            navigator.cl
