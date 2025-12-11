@@ -371,7 +371,7 @@
             break-inside: avoid;
             transition: all 0.3s ease;
             cursor: pointer;
-            user-select: all;
+            user-select: none;
             padding: 0.1rem 0.3rem;
             border-radius: 3px;
             background: rgba(255, 255, 255, 0.03);
@@ -512,6 +512,9 @@
                     <div class="command-example">!название</div>
                     <div class="section-text">
                         🎶 Библиотека звуков представлена ниже
+                    </div>
+                    <div class="section-text" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent-purple);">
+                        💡 <strong>Кликните</strong> на любую команду ниже, чтобы скопировать её в буфер обмена!
                     </div>
                 </div>
             </div>
@@ -678,7 +681,38 @@
             }
         });
 
-        window.addEventListener('load', createStars);
-    </script>
-</body>
-</html>
+        // ФУНКЦИЯ КОПИРОВАНИЯ КОМАНД
+        function copyCommandToClipboard(commandText) {
+            // Убираем всё, что идет после квадратных скобок (включая сами скобки)
+            // Регулярное выражение: удаляем пробелы и всё что в квадратных скобках
+            const cleanCommand = commandText.replace(/\s*\[.*?\]/g, '').trim();
+            
+            // Создаем временный textarea элемент для копирования
+            const textArea = document.createElement('textarea');
+            textArea.value = cleanCommand;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            
+            // Выделяем текст
+            textArea.select();
+            textArea.setSelectionRange(0, 99999); // Для мобильных устройств
+            
+            let success = false;
+            
+            try {
+                // Пытаемся скопировать старым методом
+                success = document.execCommand('copy');
+                
+                // Визуальная обратная связь
+                const originalBg = event.target.style.backgroundColor;
+                const originalTransform = event.target.style.transform;
+                
+                event.target.style.backgroundColor = 'rgba(108, 92, 231, 0.5)';
+                event.target.style.transform = 'scale(1.05)';
+                event.target.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    event.target.style.backgroundColor = originalBg;
+                    event.target.style
