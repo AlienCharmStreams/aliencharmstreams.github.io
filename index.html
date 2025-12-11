@@ -179,6 +179,7 @@
             border-radius: 6px;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .giveaway-block::before {
@@ -210,6 +211,7 @@
             margin-bottom: 0.4rem;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.3rem;
             text-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
         }
@@ -242,6 +244,7 @@
             color: var(--neon-white);
             line-height: 1.4;
             opacity: 0.9;
+            text-align: center;
         }
 
         /* Нижняя часть (раскрываемая) */
@@ -394,16 +397,12 @@
             padding: 10px 15px;
             border-radius: 4px;
             z-index: 1000;
-            animation: fadeInOut 2s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s;
             backdrop-filter: blur(4px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(-10px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
+            display: block;
         }
 
         /* Хелперы */
@@ -431,6 +430,10 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.3rem;
+            }
+            
+            .giveaway-title {
+                justify-content: center;
             }
         }
 
@@ -670,19 +673,19 @@
     </div>
 
     <script>
-        // Создание падающих звёзд - БОЛЬШЕ ЗВЁЗД
+        // Создание падающих звёзд
         function createStars() {
             const container = document.getElementById('fallingStars');
-            const starCount = 25; // Увеличили количество звёзд
+            const starCount = 25;
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                const size = Math.random() * 2 + 0.5; // Увеличили размер
+                const size = Math.random() * 2 + 0.5;
                 const posX = Math.random() * 100;
                 const delay = Math.random() * 20;
-                const duration = Math.random() * 15 + 20; // Увеличили длительность
+                const duration = Math.random() * 15 + 20;
                 const opacity = Math.random() * 0.8 + 0.2;
                 const blur = Math.random() * 0.5;
                 
@@ -701,23 +704,40 @@
         }
 
         // Раскрытие/скрытие подробной информации
-        document.getElementById('toggleDetails').addEventListener('click', function() {
-            const details = document.getElementById('infoDetails');
-            const isExpanded = details.classList.contains('expanded');
+        const toggleButton = document.getElementById('toggleDetails');
+        const infoDetails = document.getElementById('infoDetails');
+        
+        toggleButton.addEventListener('click', function() {
+            const isExpanded = infoDetails.classList.contains('expanded');
             
             if (isExpanded) {
-                details.classList.remove('expanded');
+                infoDetails.classList.remove('expanded');
                 this.innerHTML = '<span>▼</span><span>Как заработать шармы?</span>';
             } else {
-                details.classList.add('expanded');
+                infoDetails.classList.add('expanded');
                 this.innerHTML = '<span>▲</span><span>Скрыть детали</span>';
             }
         });
 
-        // Функция для копирования команды
-        function copyCommandToClipboard(commandText) {
-            // Убираем всё, что идет после квадратных скобок (включая сами скобки)
-            const cleanCommand = commandText.split(' [')[0].trim();
+        // Функция для показа уведомления
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.style.display = 'block';
             
-            // Используем современный Clipboard API
-            navigator.cl
+            // Анимация появления
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Автоматическое скрытие через 2 секунды
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500);
+            }, 2000);
+        }
+
