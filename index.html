@@ -75,7 +75,7 @@
                 /* Второй слой - средние звёзды */
                 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" opacity="0.7"><circle cx="150" cy="80" r="1.2" fill="white"/><circle cx="450" cy="200" r="1" fill="white"/><circle cx="750" cy="50" r="0.8" fill="white"/><circle cx="1050" cy="300" r="1.3" fill="white"/><circle cx="1350" cy="180" r="1.1" fill="white"/><circle cx="1650" cy="350" r="0.9" fill="white"/><circle cx="100" cy="500" r="1.2" fill="white"/><circle cx="400" cy="600" r="1" fill="white"/><circle cx="700" cy="700" r="0.8" fill="white"/><circle cx="1000" cy="800" r="1.3" fill="white"/><circle cx="1300" cy="950" r="1.1" fill="white"/><circle cx="1600" cy="1050" r="0.9" fill="white"/><circle cx="250" cy="1300" r="1.2" fill="white"/><circle cx="550" cy="1450" r="1" fill="white"/><circle cx="850" cy="1600" r="0.8" fill="white"/><circle cx="1150" cy="1750" r="1.3" fill="white"/><circle cx="1450" cy="1900" r="1.1" fill="white"/></svg>'),
                 /* Третий слой - мелкие звёзды */
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org2000/svg" width="2000" height="2000" opacity="0.4"><circle cx="80" cy="120" r="0.6" fill="white"/><circle cx="280" cy="280" r="0.5" fill="white"/><circle cx="580" cy="100" r="0.4" fill="white"/><circle cx="880" cy="380" r="0.7" fill="white"/><circle cx="1180" cy="240" r="0.5" fill="white"/><circle cx="1480" cy="420" r="0.6" fill="white"/><circle cx="1780" cy="180" r="0.4" fill="white"/><circle cx="120" cy="580" r="0.6" fill="white"/><circle cx="420" cy="680" r="0.5" fill="white"/><circle cx="720" cy="780" r="0.4" fill="white"/><circle cx="1020" cy="880" r="0.7" fill="white"/><circle cx="1320" cy="980" r="0.5" fill="white"/><circle cx="1620" cy="1080" r="0.6" fill="white"/><circle cx="180" cy="1280" r="0.4" fill="white"/><circle cx="480" cy="1380" r="0.5" fill="white"/><circle cx="780" cy="1480" r="0.6" fill="white"/><circle cx="1080" cy="1580" r="0.4" fill="white"/><circle cx="1380" cy="1680" r="0.7" fill="white"/><circle cx="1680" cy="1780" r="0.5" fill="white"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" opacity="0.4"><circle cx="80" cy="120" r="0.6" fill="white"/><circle cx="280" cy="280" r="0.5" fill="white"/><circle cx="580" cy="100" r="0.4" fill="white"/><circle cx="880" cy="380" r="0.7" fill="white"/><circle cx="1180" cy="240" r="0.5" fill="white"/><circle cx="1480" cy="420" r="0.6" fill="white"/><circle cx="1780" cy="180" r="0.4" fill="white"/><circle cx="120" cy="580" r="0.6" fill="white"/><circle cx="420" cy="680" r="0.5" fill="white"/><circle cx="720" cy="780" r="0.4" fill="white"/><circle cx="1020" cy="880" r="0.7" fill="white"/><circle cx="1320" cy="980" r="0.5" fill="white"/><circle cx="1620" cy="1080" r="0.6" fill="white"/><circle cx="180" cy="1280" r="0.4" fill="white"/><circle cx="480" cy="1380" r="0.5" fill="white"/><circle cx="780" cy="1480" r="0.6" fill="white"/><circle cx="1080" cy="1580" r="0.4" fill="white"/><circle cx="1380" cy="1680" r="0.7" fill="white"/><circle cx="1680" cy="1780" r="0.5" fill="white"/></svg>'),
                 /* Градиент космоса */
                 linear-gradient(to bottom, #0a0a0a 0%, #1a1a2e 30%, #0f0f23 70%, #0a0a0a 100%);
             z-index: -2;
@@ -383,23 +383,7 @@
             transform: translateX(2px);
         }
 
-        /* Хелперы */
-        .highlight {
-            color: var(--neon-white);
-            font-weight: 500;
-        }
-
-        .mono {
-            font-family: 'Courier New', monospace;
-            color: var(--neon-white);
-            background: rgba(108, 92, 231, 0.15);
-            padding: 0.1rem 0.3rem;
-            border-radius: 3px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(108, 92, 231, 0.3);
-        }
-
-        /* Анимация копирования */
+        /* Анимация копирования (добавили только это) */
         .command-copied {
             animation: commandCopied 0.5s ease;
         }
@@ -420,7 +404,7 @@
             }
         }
 
-        /* Уведомление о копировании */
+        /* Уведомление о копировании (добавили только это) */
         .copy-notification {
             position: fixed;
             top: 20px;
@@ -444,6 +428,22 @@
             display: block;
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Хелперы */
+        .highlight {
+            color: var(--neon-white);
+            font-weight: 500;
+        }
+
+        .mono {
+            font-family: 'Courier New', monospace;
+            color: var(--neon-white);
+            background: rgba(108, 92, 231, 0.15);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(108, 92, 231, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -482,7 +482,7 @@
     <!-- Падающие звёзды - БОЛЬШЕ ЗВЁЗД -->
     <div class="falling-stars" id="fallingStars"></div>
 
-    <!-- Уведомление о копировании -->
+    <!-- Уведомление о копировании (добавили только это) -->
     <div id="copyNotification" class="copy-notification">
         Команда скопирована! ✅
     </div>
@@ -696,19 +696,19 @@
     </div>
 
     <script>
-        // Создание падающих звёзд
+        // Создание падающих звёзд - БОЛЬШЕ ЗВЁЗД
         function createStars() {
             const container = document.getElementById('fallingStars');
-            const starCount = 25;
+            const starCount = 25; // Увеличили количество звёзд
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                const size = Math.random() * 2 + 0.5;
+                const size = Math.random() * 2 + 0.5; // Увеличили размер
                 const posX = Math.random() * 100;
                 const delay = Math.random() * 20;
-                const duration = Math.random() * 15 + 20;
+                const duration = Math.random() * 15 + 20; // Увеличили длительность
                 const opacity = Math.random() * 0.8 + 0.2;
                 const blur = Math.random() * 0.5;
                 
@@ -727,10 +727,4 @@
         }
 
         // Раскрытие/скрытие подробной информации
-        document.getElementById('toggleDetails').addEventListener('click', function() {
-            const details = document.getElementById('infoDetails');
-            const isExpanded = details.classList.contains('expanded');
-            
-            if (isExpanded) {
-                details.classList.remove('expanded');
-                this.innerHTML = '<span>▼</span><span>Как заработать шармы?</span>';
+        document
