@@ -369,7 +369,7 @@
             break-inside: avoid;
             transition: all 0.3s ease;
             cursor: pointer;
-            user-select: none;
+            user-select: all;
             padding: 0.1rem 0.3rem;
             border-radius: 3px;
             background: rgba(255, 255, 255, 0.03);
@@ -381,53 +381,6 @@
             background: rgba(108, 92, 231, 0.2);
             border-color: rgba(108, 92, 231, 0.4);
             transform: translateX(2px);
-        }
-
-        /* Анимация копирования (добавили только это) */
-        .command-copied {
-            animation: commandCopied 0.5s ease;
-        }
-
-        @keyframes commandCopied {
-            0% {
-                background-color: rgba(108, 92, 231, 0.2);
-                transform: scale(1);
-            }
-            50% {
-                background-color: rgba(108, 92, 231, 0.5);
-                transform: scale(1.05);
-                box-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
-            }
-            100% {
-                background-color: rgba(108, 92, 231, 0.2);
-                transform: scale(1);
-            }
-        }
-
-        /* Уведомление о копировании (добавили только это) */
-        .copy-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(108, 92, 231, 0.95);
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.3s, transform 0.3s;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-weight: 500;
-            display: none;
-        }
-
-        .copy-notification.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Хелперы */
@@ -456,15 +409,6 @@
                 align-items: flex-start;
                 gap: 0.3rem;
             }
-            
-            .copy-notification {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                text-align: center;
-                font-size: 0.9rem;
-                padding: 10px 15px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -481,11 +425,6 @@
 <body>
     <!-- Падающие звёзды - БОЛЬШЕ ЗВЁЗД -->
     <div class="falling-stars" id="fallingStars"></div>
-
-    <!-- Уведомление о копировании (добавили только это) -->
-    <div id="copyNotification" class="copy-notification">
-        Команда скопирована! ✅
-    </div>
 
     <!-- Основной контент -->
     <h1><span class="music-icon">🎵</span> ЧАТ-БОТ ЗВУКОВ</h1>
@@ -571,9 +510,6 @@
                     <div class="command-example">!название</div>
                     <div class="section-text">
                         🎶 Библиотека звуков представлена ниже
-                    </div>
-                    <div class="section-text" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent-purple);">
-                        💡 <strong>Кликните</strong> на любую команду ниже, чтобы скопировать её в буфер обмена!
                     </div>
                 </div>
             </div>
@@ -727,4 +663,20 @@
         }
 
         // Раскрытие/скрытие подробной информации
-        document
+        document.getElementById('toggleDetails').addEventListener('click', function() {
+            const details = document.getElementById('infoDetails');
+            const isExpanded = details.classList.contains('expanded');
+            
+            if (isExpanded) {
+                details.classList.remove('expanded');
+                this.innerHTML = '<span>▼</span><span>Как заработать шармы?</span>';
+            } else {
+                details.classList.add('expanded');
+                this.innerHTML = '<span>▲</span><span>Скрыть детали</span>';
+            }
+        });
+
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>
