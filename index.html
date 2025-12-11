@@ -179,7 +179,6 @@
             border-radius: 6px;
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
         .giveaway-block::before {
@@ -211,7 +210,6 @@
             margin-bottom: 0.4rem;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.3rem;
             text-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
         }
@@ -244,7 +242,6 @@
             color: var(--neon-white);
             line-height: 1.4;
             opacity: 0.9;
-            text-align: center;
         }
 
         /* Нижняя часть (раскрываемая) */
@@ -372,12 +369,11 @@
             break-inside: avoid;
             transition: all 0.3s ease;
             cursor: pointer;
-            user-select: none;
+            user-select: all;
             padding: 0.1rem 0.3rem;
             border-radius: 3px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid transparent;
-            position: relative;
         }
 
         .command:hover {
@@ -385,24 +381,6 @@
             background: rgba(108, 92, 231, 0.2);
             border-color: rgba(108, 92, 231, 0.4);
             transform: translateX(2px);
-        }
-
-        /* Стиль для уведомления о копировании */
-        .copy-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(108, 92, 231, 0.9);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 4px;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s, transform 0.3s;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: block;
         }
 
         /* Хелперы */
@@ -431,10 +409,6 @@
                 align-items: flex-start;
                 gap: 0.3rem;
             }
-            
-            .giveaway-title {
-                justify-content: center;
-            }
         }
 
         @media (max-width: 480px) {
@@ -445,24 +419,12 @@
             h1 {
                 font-size: 1.7rem;
             }
-            
-            .copy-notification {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
     <!-- Падающие звёзды - БОЛЬШЕ ЗВЁЗД -->
     <div class="falling-stars" id="fallingStars"></div>
-    
-    <!-- Уведомление о копировании (скрыто изначально) -->
-    <div id="copyNotification" class="copy-notification" style="display: none;">
-        Команда скопирована в буфер обмена!
-    </div>
 
     <!-- Основной контент -->
     <h1><span class="music-icon">🎵</span> ЧАТ-БОТ ЗВУКОВ</h1>
@@ -548,9 +510,6 @@
                     <div class="command-example">!название</div>
                     <div class="section-text">
                         🎶 Библиотека звуков представлена ниже
-                    </div>
-                    <div class="section-text" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent-purple);">
-                        💡 <strong>Кликните</strong> на любую команду ниже, чтобы скопировать её в буфер обмена!
                     </div>
                 </div>
             </div>
@@ -673,19 +632,19 @@
     </div>
 
     <script>
-        // Создание падающих звёзд
+        // Создание падающих звёзд - БОЛЬШЕ ЗВЁЗД
         function createStars() {
             const container = document.getElementById('fallingStars');
-            const starCount = 25;
+            const starCount = 25; // Увеличили количество звёзд
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                const size = Math.random() * 2 + 0.5;
+                const size = Math.random() * 2 + 0.5; // Увеличили размер
                 const posX = Math.random() * 100;
                 const delay = Math.random() * 20;
-                const duration = Math.random() * 15 + 20;
+                const duration = Math.random() * 15 + 20; // Увеличили длительность
                 const opacity = Math.random() * 0.8 + 0.2;
                 const blur = Math.random() * 0.5;
                 
@@ -704,40 +663,20 @@
         }
 
         // Раскрытие/скрытие подробной информации
-        const toggleButton = document.getElementById('toggleDetails');
-        const infoDetails = document.getElementById('infoDetails');
-        
-        toggleButton.addEventListener('click', function() {
-            const isExpanded = infoDetails.classList.contains('expanded');
+        document.getElementById('toggleDetails').addEventListener('click', function() {
+            const details = document.getElementById('infoDetails');
+            const isExpanded = details.classList.contains('expanded');
             
             if (isExpanded) {
-                infoDetails.classList.remove('expanded');
+                details.classList.remove('expanded');
                 this.innerHTML = '<span>▼</span><span>Как заработать шармы?</span>';
             } else {
-                infoDetails.classList.add('expanded');
+                details.classList.add('expanded');
                 this.innerHTML = '<span>▲</span><span>Скрыть детали</span>';
             }
         });
 
-        // Функция для показа уведомления
-        function showCopyNotification() {
-            const notification = document.getElementById('copyNotification');
-            notification.style.display = 'block';
-            
-            // Анимация появления
-            setTimeout(() => {
-                notification.style.opacity = '1';
-                notification.style.transform = 'translateY(0)';
-            }, 10);
-            
-            // Автоматическое скрытие через 2 секунды
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateY(-10px)';
-                
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 500);
-            }, 2000);
-        }
-
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>
