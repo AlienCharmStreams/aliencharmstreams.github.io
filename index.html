@@ -383,6 +383,35 @@
             transform: translateX(2px);
         }
 
+        /* Стили для уведомления о копировании */
+.notification {
+  /* Позиционирование: фиксируем уведомление внизу по центру экрана */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Внешний вид */
+  background-color: #333;
+  /* color: white; */
+  color: var(--neon-white);
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Гарантируем, что уведомление будет поверх всего */
+
+  /* Анимация: по умолчанию скрыто */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Класс, который делает уведомление видимым */
+.notification.show {
+  opacity: 1;
+  visibility: visible;
+}
+
         /* Хелперы */
         .highlight {
             color: var(--neon-white);
@@ -631,6 +660,8 @@
         </ul>
     </div>
 
+    <div id="copy-notification" class="notification">Скопировано!</div>
+
     <script>
         // Создание падающих звёзд - БОЛЬШЕ ЗВЁЗД
         function createStars() {
@@ -677,6 +708,35 @@
         });
 
         window.addEventListener('load', createStars);
+
+        // Копируем текст
+  const commandElements = document.querySelectorAll('.command');
+  const notificationElement = document.getElementById('copy-notification');
+
+  function showNotification(message) {
+    notificationElement.textContent = message;
+    notificationElement.classList.add('show');
+    setTimeout(() => {
+      notificationElement.classList.remove('show');
+    }, 1500);
+  }
+
+  async function copyText(textToCopy) {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      showNotification('Скопировано!');
+    } catch (err) {
+      console.error('Не удалось скопировать текст: ', err);
+      showNotification('Ошибка копирования.');
+    }
+  }
+
+  commandElements.forEach((element) => {
+    element.addEventListener('click', () => {
+      const textToCopy = element.textContent.trim();
+      copyText(textToCopy);
+    });
+  });
     </script>
 </body>
 </html>
