@@ -371,11 +371,13 @@
             break-inside: avoid;
             transition: all 0.3s ease;
             cursor: pointer;
-            user-select: all;
-            padding: 0.1rem 0.3rem;
+            user-select: none;
+            padding: 0.2rem 0.5rem;
             border-radius: 3px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid transparent;
+            position: relative;
+            display: block;
         }
 
         .command:hover {
@@ -383,6 +385,38 @@
             background: rgba(108, 92, 231, 0.2);
             border-color: rgba(108, 92, 231, 0.4);
             transform: translateX(2px);
+        }
+
+        /* Стили для пояснений в квадратных скобках */
+        .command .description {
+            color: #aaa;
+            font-size: 0.85em;
+            opacity: 0.7;
+            font-style: italic;
+            margin-left: 0.3rem;
+        }
+
+        /* Стили для уведомления о копировании */
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(108, 92, 231, 0.95);
+            color: var(--neon-white);
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Хелперы */
@@ -427,6 +461,9 @@
 <body>
     <!-- Падающие звёзды - БОЛЬШЕ ЗВЁЗД -->
     <div class="falling-stars" id="fallingStars"></div>
+
+    <!-- Уведомление о копировании -->
+    <div class="copy-notification" id="copyNotification">Команда скопирована! 📋</div>
 
     <!-- Основной контент -->
     <h1><span class="music-icon">🎵</span> ЧАТ-БОТ ЗВУКОВ</h1>
@@ -522,114 +559,114 @@
     <div class="section">
         <h2>🎤 Приветствия</h2>
         <ul class="commands-list">
-            <li class="command">!здарова бандиты</li>
-            <li class="command">!здарова чуваки</li>
-            <li class="command">!О привет</li>
-            <li class="command">!здарова отцы</li>
-            <li class="command">!здарова брат</li>
-            <li class="command">!здравствуй брат</li>
+            <li class="command"><span class="command-text">!здарова бандиты</span></li>
+            <li class="command"><span class="command-text">!здарова чуваки</span></li>
+            <li class="command"><span class="command-text">!О привет</span></li>
+            <li class="command"><span class="command-text">!здарова отцы</span></li>
+            <li class="command"><span class="command-text">!здарова брат</span></li>
+            <li class="command"><span class="command-text">!здравствуй брат</span></li>
         </ul>
     </div>
 
     <div class="section">
         <h2>🎭 Популярные фразы</h2>
         <ul class="commands-list">
-            <li class="command">!испанцы</li>
-            <li class="command">!начальники не опаздывают</li>
-            <li class="command">!вы нас балуете ваша светлость</li>
-            <li class="command">!потерялася</li>
-            <li class="command">!сильно потерялася</li>
-            <li class="command">!вот это поворот</li>
-            <li class="command">!совпадение</li>
-            <li class="command">!ду хаст</li>
-            <li class="command">!x-files</li>
-            <li class="command">!великолепный план Уолтер</li>
-            <li class="command">!просчитался но где</li>
-            <li class="command">!широкую на широкую</li>
-            <li class="command">!гениально</li>
-            <li class="command">!не участвую</li>
-            <li class="command">!фиаско</li>
-            <li class="command">!коварный тип</li>
-            <li class="command">!это безопасно [андроид Дэвид]</li>
-            <li class="command">!хьюстон у нас проблема</li>
-            <li class="command">!сомнительно но окей [(с) Тинькофф]</li>
-            <li class="command">!это было п#здец как смело [(с) Тинькофф]</li>
-            <li class="command">!желаю здоровья и выжить [(с) Тинькофф]</li>
-            <li class="command">!любая миссия [Футурама]</li>
-            <li class="command">!бендер</li>
-            <li class="command">!I need to meditate [Trevor GTA]</li>
-            <li class="command">!I'll be back</li>
-            <li class="command">!you died [Dark Souls]</li>
-            <li class="command">!мои нервы</li>
-            <li class="command">!титры [directed by Robert B. Weide]</li>
-            <li class="command">!Ералаш</li>
-            <li class="command">!ямэтэ кудасай</li>
-            <li class="command">!хлопики</li>
-            <li class="command">!модуль космоса [Portal]</li>
-            <li class="command">!Фримен</li>
+            <li class="command"><span class="command-text">!испанцы</span></li>
+            <li class="command"><span class="command-text">!начальники не опаздывают</span></li>
+            <li class="command"><span class="command-text">!вы нас балуете ваша светлость</span></li>
+            <li class="command"><span class="command-text">!потерялася</span></li>
+            <li class="command"><span class="command-text">!сильно потерялася</span></li>
+            <li class="command"><span class="command-text">!вот это поворот</span></li>
+            <li class="command"><span class="command-text">!совпадение</span></li>
+            <li class="command"><span class="command-text">!ду хаст</span></li>
+            <li class="command"><span class="command-text">!x-files</span></li>
+            <li class="command"><span class="command-text">!великолепный план Уолтер</span></li>
+            <li class="command"><span class="command-text">!просчитался но где</span></li>
+            <li class="command"><span class="command-text">!широкую на широкую</span></li>
+            <li class="command"><span class="command-text">!гениально</span></li>
+            <li class="command"><span class="command-text">!не участвую</span></li>
+            <li class="command"><span class="command-text">!фиаско</span></li>
+            <li class="command"><span class="command-text">!коварный тип</span></li>
+            <li class="command"><span class="command-text">!это безопасно</span> <span class="description">[андроид Дэвид]</span></li>
+            <li class="command"><span class="command-text">!хьюстон у нас проблема</span></li>
+            <li class="command"><span class="command-text">!сомнительно но окей</span> <span class="description">[(с) Тинькофф]</span></li>
+            <li class="command"><span class="command-text">!это было п#здец как смело</span> <span class="description">[(с) Тинькофф]</span></li>
+            <li class="command"><span class="command-text">!желаю здоровья и выжить</span> <span class="description">[(с) Тинькофф]</span></li>
+            <li class="command"><span class="command-text">!любая миссия</span> <span class="description">[Футурама]</span></li>
+            <li class="command"><span class="command-text">!бендер</span></li>
+            <li class="command"><span class="command-text">!I need to meditate</span> <span class="description">[Trevor GTA]</span></li>
+            <li class="command"><span class="command-text">!I'll be back</span></li>
+            <li class="command"><span class="command-text">!you died</span> <span class="description">[Dark Souls]</span></li>
+            <li class="command"><span class="command-text">!мои нервы</span></li>
+            <li class="command"><span class="command-text">!титры</span> <span class="description">[directed by Robert B. Weide]</span></li>
+            <li class="command"><span class="command-text">!Ералаш</span></li>
+            <li class="command"><span class="command-text">!ямэтэ кудасай</span></li>
+            <li class="command"><span class="command-text">!хлопики</span></li>
+            <li class="command"><span class="command-text">!модуль космоса</span> <span class="description">[Portal]</span></li>
+            <li class="command"><span class="command-text">!Фримен</span></li>
         </ul>
     </div>
 
     <div class="section">
         <h2>🔫 Боевые</h2>
         <ul class="commands-list">
-            <li class="command">!крик Вильгельма</li>
-            <li class="command">!ножик</li>
-            <li class="command">!бонжур [Bad Commedian]</li>
-            <li class="command">!дробовики</li>
-            <li class="command">!дрын</li>
-            <li class="command">!на нас напали</li>
-            <li class="command">!опять разборка</li>
-            <li class="command">!киборг убийца</li>
+            <li class="command"><span class="command-text">!крик Вильгельма</span></li>
+            <li class="command"><span class="command-text">!ножик</span></li>
+            <li class="command"><span class="command-text">!бонжур</span> <span class="description">[Bad Commedian]</span></li>
+            <li class="command"><span class="command-text">!дробовики</span></li>
+            <li class="command"><span class="command-text">!дрын</span></li>
+            <li class="command"><span class="command-text">!на нас напали</span></li>
+            <li class="command"><span class="command-text">!опять разборка</span></li>
+            <li class="command"><span class="command-text">!киборг убийца</span></li>
         </ul>
     </div>
 
     <div class="section">
         <h2>🍕 Перерыв</h2>
         <ul class="commands-list">
-            <li class="command">!пора подкрепиться</li>
-            <li class="command">!пикничок</li>
-            <li class="command">!кофе</li>
+            <li class="command"><span class="command-text">!пора подкрепиться</span></li>
+            <li class="command"><span class="command-text">!пикничок</span></li>
+            <li class="command"><span class="command-text">!кофе</span></li>
         </ul>
     </div>
 
     <div class="section">
         <h2>😄 Реакции</h2>
         <ul class="commands-list">
-            <li class="command">!чтооо [вопросительно]</li>
-            <li class="command">!да да [иронично]</li>
-            <li class="command">!нет</li>
-            <li class="command">!hitler nein</li>
-            <li class="command">!omg</li>
-            <li class="command">!повезло</li>
-            <li class="command">!не пройдешь</li>
-            <li class="command">!ты пройдешь</li>
-            <li class="command">!галочка</li>
-            <li class="command">!пожили и хватит</li>
-            <li class="command">!меня убили но я выжил</li>
-            <li class="command">!я маслину поймал</li>
-            <li class="command">!это жестко</li>
-            <li class="command">!святая корова</li>
-            <li class="command">!да ладно</li>
-            <li class="command">!вонючий случай</li>
-            <li class="command">!туды яго</li>
-            <li class="command">!опа кого-то хлопнули</li>
-            <li class="command">!писюны</li>
-            <li class="command">!в очередь</li>
-            <li class="command">!полномочия</li>
-            <li class="command">!ура заработало</li>
-            <li class="command">!убойные каникулы</li>
+            <li class="command"><span class="command-text">!чтооо</span> <span class="description">[вопросительно]</span></li>
+            <li class="command"><span class="command-text">!да да</span> <span class="description">[иронично]</span></li>
+            <li class="command"><span class="command-text">!нет</span></li>
+            <li class="command"><span class="command-text">!hitler nein</span></li>
+            <li class="command"><span class="command-text">!omg</span></li>
+            <li class="command"><span class="command-text">!повезло</span></li>
+            <li class="command"><span class="command-text">!не пройдешь</span></li>
+            <li class="command"><span class="command-text">!ты пройдешь</span></li>
+            <li class="command"><span class="command-text">!галочка</span></li>
+            <li class="command"><span class="command-text">!пожили и хватит</span></li>
+            <li class="command"><span class="command-text">!меня убили но я выжил</span></li>
+            <li class="command"><span class="command-text">!я маслину поймал</span></li>
+            <li class="command"><span class="command-text">!это жестко</span></li>
+            <li class="command"><span class="command-text">!святая корова</span></li>
+            <li class="command"><span class="command-text">!да ладно</span></li>
+            <li class="command"><span class="command-text">!вонючий случай</span></li>
+            <li class="command"><span class="command-text">!туды яго</span></li>
+            <li class="command"><span class="command-text">!опа кого-то хлопнули</span></li>
+            <li class="command"><span class="command-text">!писюны</span></li>
+            <li class="command"><span class="command-text">!в очередь</span></li>
+            <li class="command"><span class="command-text">!полномочия</span></li>
+            <li class="command"><span class="command-text">!ура заработало</span></li>
+            <li class="command"><span class="command-text">!убойные каникулы</span></li>
         </ul>
     </div>
 
     <div class="section">
         <h2>👋 Завершение стрима</h2>
         <ul class="commands-list">
-            <li class="command">!всего хо ро ше го</li>
-            <li class="command">!все вон</li>
-            <li class="command">!счастливо братва</li>
-            <li class="command">!скоро встретимся</li>
-            <li class="command">!hasta la vista</li>
+            <li class="command"><span class="command-text">!всего хо ро ше го</span></li>
+            <li class="command"><span class="command-text">!все вон</span></li>
+            <li class="command"><span class="command-text">!счастливо братва</span></li>
+            <li class="command"><span class="command-text">!скоро встретимся</span></li>
+            <li class="command"><span class="command-text">!hasta la vista</span></li>
         </ul>
     </div>
 
@@ -678,7 +715,94 @@
             }
         });
 
-        window.addEventListener('load', createStars);
+        // Функция для извлечения только команды из текста
+        function extractCommand(element) {
+            // Ищем элемент с классом command-text внутри элемента команды
+            const commandTextElement = element.querySelector('.command-text');
+            if (commandTextElement) {
+                return commandTextElement.textContent.trim();
+            }
+            
+            // Если элемента нет, берем весь текст и удаляем пояснения в квадратных скобках
+            const fullText = element.textContent.trim();
+            // Удаляем всё, что находится в квадратных скобках, включая сами скобки
+            return fullText.replace(/\s*\[.*?\]/g, '').trim();
+        }
+
+        // Функция копирования команд
+        function copyToClipboard(text) {
+            // Создаем временный textarea
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            
+            // Выделяем и копируем
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // Для мобильных устройств
+            
+            try {
+                document.execCommand('copy');
+                
+                // Показываем уведомление
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                
+                // Скрываем уведомление через 2 секунды
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Ошибка при копировании: ', err);
+                
+                // Альтернативный метод для мобильных устройств
+                navigator.clipboard.writeText(text).then(() => {
+                    const notification = document.getElementById('copyNotification');
+                    notification.classList.add('show');
+                    
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 2000);
+                });
+            } finally {
+                // Удаляем временный textarea
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // Добавляем обработчики кликов на все команды
+        function setupCommandCopy() {
+            const commands = document.querySelectorAll('.command');
+            
+            commands.forEach(command => {
+                command.addEventListener('click', function() {
+                    const commandText = extractCommand(this);
+                    copyToClipboard(commandText);
+                    
+                    // Визуальная обратная связь
+                    this.style.background = 'rgba(108, 92, 231, 0.4)';
+                    this.style.borderColor = 'rgba(108, 92, 231, 0.8)';
+                    this.style.transform = 'scale(0.98)';
+                    
+                    setTimeout(() => {
+                        this.style.background = '';
+                        this.style.borderColor = '';
+                        this.style.transform = '';
+                    }, 300);
+                });
+                
+                // Добавляем всплывающую подсказку
+                command.title = 'Нажмите, чтобы скопировать команду';
+            });
+        }
+
+        // Инициализация при загрузке страницы
+        window.addEventListener('load', function() {
+            createStars();
+            setupCommandCopy();
+        });
     </script>
 </body>
 </html>
